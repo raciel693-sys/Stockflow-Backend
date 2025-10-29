@@ -1,0 +1,23 @@
+{
+  "name": "stockflow_backend",
+  "version": "1.0.0",
+  "description": "Backend para la lógica de negocio de StockFlow",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "node",
+    "express"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@google/genai": "^0.14.1",
+    "axios": "^1.13.1",
+    "cors": "^2.8.5",
+    "express": "^4.21.2",
+    "stripe": "^16.12.0"
+  }
+}
