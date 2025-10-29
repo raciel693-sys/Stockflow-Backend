@@ -1,23 +1,23 @@
 {
-  "name": "stockflow_backend",
+  "name": "stockflow-backend",
   "version": "1.0.0",
   "description": "Backend para la lógica de negocio de StockFlow",
-  "main": "server.js",
-"type": "module",
+  "main": "index.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
     "node",
     "express"
   ],
-  "author": "",
+  "author": "StockFlow Project",
   "license": "ISC",
   "dependencies": {
-    "@google/generative-ai": "^0.14.1",
-    "axios": "^1.6.2",
+    "axios": "^1.7.2",
     "cors": "^2.8.5",
     "express": "^4.21.2",
-    "stripe": "^16.12.0"
+    "stripe": "^16.5.0",
+    "@google/genai": "^0.14.0"
   }
 }
