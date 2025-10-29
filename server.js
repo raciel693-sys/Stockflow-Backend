@@ -1,15 +1,18 @@
-// server.js — versión 100% compatible con Render
+// server.js (Versión ES Module: Compatible con Node 20/Render)
 
-const express = require("express");
-const cors = require("cors");
+import express from "express";
+import cors from "cors";
+import { GoogleGenerativeAI } from "@google/generative-ai"; // Librería de Gemini
+import Stripe from "stripe"; // Librería de Stripe
 
+// ==== CONFIGURACIÓN BASE ====
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3000; // Render usará el puerto asignado
 
 app.use(cors());
 app.use(express.json());
 
-// ==== ENDPOINTS ====
+// ==== ENDPOINTS (Lógica Estable) ====
 
 // Registro de empresa
 app.post("/api/companies", (req, res) => {
@@ -30,12 +33,13 @@ app.post("/api/checkout", (req, res) => {
 
 // Consulta IA
 app.get("/api/consulta-ia", (req, res) => {
+  // Simulación de respuesta IA
   res.json({ ia_respuesta: "Simulación: Lista para producción." });
 });
 
 // Endpoint base
 app.get("/", (req, res) => {
-  res.send("✅ Servidor corriendo correctamente en Render (CommonJS).");
+  res.send("✅ Servidor ejecutándose en Render (ES Module).");
 });
 
 // Iniciar servidor
