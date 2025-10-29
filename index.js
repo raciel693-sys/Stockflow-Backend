@@ -1,19 +1,19 @@
-// index.js (Backend 100% Estable para la Nube)
+// index.js (CÓDIGO FINAL DE PRODUCCIÓN - ÚLTIMO INTENTO)
 
-// 1. IMPORTACIONES
+// Usamos la sintaxis require y declaramos todo con const (estable)
 const express = require("express");
 const cors = require("cors");
-// Las librerías están en package.json y se asumen instaladas para el despliegue.
+// Las otras librerías (axios, stripe, gemini) están instaladas y serán requeridas DENTRO de las funciones.
 
 // ==== CONFIGURACIÓN BASE ====
 const app = express();
-// Cloud Run / Render usan process.env.PORT, no 3000
-const PORT = process.env.PORT || 8080; 
+// Render usa process.env.PORT
+const PORT = process.env.PORT || 3000; 
 
 app.use(express.json());
 app.use(cors());
 
-// ==== ENDPOINTS DE STOCKFLOW (Lógica Mínima Estable) ====
+// ==== ENDPOINTS DE STOCKFLOW (Lógica Estable) ====
 
 // 1. Registro de empresa
 app.post("/api/companies", function(req, res) {
@@ -39,10 +39,10 @@ app.get("/api/consulta-ia", function(req, res) {
 
 // Endpoint base
 app.get("/", function(req, res) {
-  res.send("✅ Servidor listo. URL de prueba para Webhooks de Meta.");
+  res.send("✅ Servidor listo. Render debe compilar ahora.");
 });
 
 // ==== INICIO ====
 app.listen(PORT, function() {
   console.log(🚀 Servidor ejecutándose en el puerto: ${PORT});
-}); 
+});
