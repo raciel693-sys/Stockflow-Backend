@@ -1,48 +1,43 @@
-// index.js (CÓDIGO FINAL VERSIÓN ES MODULE)
+// index.js — versión funcional compatible con Render y Flutter
 
-// Usamos la sintaxis moderna 'import'
-import express from 'express';
-import cors from 'cors';
+import express from "express";
+import cors from "cors";
 
-// ==== CONFIGURACIÓN BASE ====
 const app = express();
-// Render usa process.env.PORT, si no, usa 3000 localmente
-const PORT = process.env.PORT || 3000; 
+const PORT = process.env.PORT || 3000;
 
-app.use(express.json());
 app.use(cors());
+app.use(express.json());
 
-// ==== ENDPOINTS DE STOCKFLOW (Lógica Estable) ====
+// ==== ENDPOINTS ====
 
-// 1. Registro de empresa
+// Registro de empresa
 app.post("/api/companies", (req, res) => {
-  // Nota: Usamos la sintaxis moderna de Arrow Function (flecha)
   const newCompanyId = Math.floor(Math.random() * 1000000);
   res.status(201).json({ id: newCompanyId, status: "PENDIENTE_LINK" });
 });
 
-// 2. Crear sesión de pago (Stripe)
+// Crear sesión de pago (Stripe)
 app.post("/api/checkout", (req, res) => {
-  const planName = req.body.planName || "Plan Básico";
-  const session = {
-      id: 'cs_test_ok',
-      url: 'https://checkout.stripe.com/pay/SIMULADA',
-      plan: planName
-  };
-  res.json({ sessionId: session.id, checkoutUrl: session.url, plan: planName });
+  const { planName = "Plan Básico" } = req.body;
+  res.json({
+    sessionId: "cs_test_ok",
+    checkoutUrl: "https://checkout.stripe.com/pay/SIMULADA",
+    plan: planName,
+  });
 });
 
-// 3. Consulta con IA (Gemini)
+// Consulta IA (Gemini)
 app.get("/api/consulta-ia", (req, res) => {
   res.json({ ia_respuesta: "Simulación: Lista para producción." });
 });
 
 // Endpoint base
 app.get("/", (req, res) => {
-  res.send("✅ Servidor listo. La sintaxis ES Module debe compilar sin errores ahora.");
+  res.send("✅ Servidor funcionando correctamente en Render.");
 });
 
-// ==== INICIO ====
+// Iniciar servidor
 app.listen(PORT, () => {
-  console.log(🚀 Servidor ejecutándose en el puerto: ${PORT});
+  console.log(🚀 Servidor ejecutándose en el puerto ${PORT});
 });
