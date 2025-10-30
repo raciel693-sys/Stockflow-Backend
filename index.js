@@ -3,22 +3,22 @@
 const express = require("express");
 const cors = require("cors");
 const app = express();
-const PORT = 8080; // Puerto para el arranque local
+const PORT = process.env.PORT || 8080; // Usa el puerto que Netlify le asigne
 
 app.use(express.json());
 
-// *CORRECCIÓN DE CORS FINAL: Permite el acceso*
+// *CORS FINAL: Permite el acceso universal*
 app.use(cors({ origin: true })); 
 
 // ==== ENDPOINTS DE STOCKFLOW (Lógica Estable) ====
 
-// Endpoint de Registro
+// Endpoint de Registro (POST /api/companies)
 app.post("/api/companies", function(req, res) {
   const newCompanyId = Math.floor(Math.random() * 1000000);
   res.status(201).json({ id: newCompanyId, status: "PENDIENTE_LINK", mensaje: "Registro OK" });
 });
 
-// Endpoint de Checkout
+// Endpoint de Checkout (POST /api/checkout)
 app.post("/api/checkout", function(req, res) {
   const planName = req.body.planName || "Plan Básico";
   const session = {
@@ -29,7 +29,7 @@ app.post("/api/checkout", function(req, res) {
   res.json(session);
 });
 
-// Endpoint base para verificación
+// Endpoint base para verificación (GET /)
 app.get("/", function(req, res) {
   res.send("✅ Servidor listo. CommonJS Final.");
 });
