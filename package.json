@@ -2,9 +2,7 @@
   "name": "stockflow_backend",
   "version": "1.0.0",
   "description": "Backend para la lógica de negocio de StockFlow (Netlify)",
-  "main": "index.cjs",
   "scripts": {
-    "start": "node index.cjs"
   },
   "keywords": [
     "node",
