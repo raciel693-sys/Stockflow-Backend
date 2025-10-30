@@ -39,4 +39,10 @@ app.get("/", function(req, res) {
 
 // ==== EXPORTACIÓN FINAL PARA NETLIFY ====
 // Esta es la sintaxis universalmente aceptada por Netlify Functions.
-module.exports = app;
+// Exportamos la función como un handler
+exports.handler = async (event, context) => {
+    return {
+        statusCode: 200,
+        body: JSON.stringify({ message: "Servidor Listo. Handler Final." })
+    };
+};
