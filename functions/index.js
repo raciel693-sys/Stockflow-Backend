@@ -1,25 +1,36 @@
-// index.js (CÓDIGO HANDLER UNIVERSAL)
+// functions/index.js (CÓDIGO SERVERLESS + EXPRESS)
 
-// Eliminamos Express y CORS para esta prueba.
-// const express = require("express");
+const express = require("express");
+const serverless = require("serverless-http"); // Vuelve a entrar la librería
+const cors = require("cors"); 
+const app = express();
 
-// Esta es la sintaxis de Serverless universal:
-exports.handler = async (event, context) => {
-    // Si la App de Flutter llama a /api/companies, devuelve un éxito simulado.
-    if (event.path.endsWith('/companies')) {
-        return {
-            statusCode: 201, // Código de éxito de creación (registro)
-            body: JSON.stringify({ 
-                id: Math.floor(Math.random() * 1000000), 
-                status: "REGISTRO_OK",
-                mensaje: "✅ Éxito: Servidor funcional." 
-            })
-        };
-    }
-    
-    // Si se llama al endpoint base
-    return {
-        statusCode: 200,
-        body: JSON.stringify({ message: "✅ Servidor Listo. Handler Final." })
-    };
-};
+app.use(express.json());
+app.use(cors({ origin: true })); 
+
+// ==== ENDPOINTS DE STOCKFLOW (Lógica de Simulación) ====
+
+// La ruta es la misma que usa Flutter: /companies
+app.post("/companies", function(req, res) { 
+  const newCompanyId = Math.floor(Math.random() * 1000000);
+  res.status(201).json({ 
+    id: newCompanyId, 
+    status: "REGISTRO_OK", 
+    mensaje: "✅ Éxito: Registro simulado." 
+  });
+});
+
+// La ruta es la misma que usa Flutter: /checkout
+app.post("/checkout", function(req, res) { 
+  const planName = req.body.planName || "Plan Básico";
+  res.json({ sessionId: 'CS_SIMULADO', checkoutUrl: 'https://checkout.stockflow.simulado', plan: planName });
+});
+
+// Endpoint base para verificación
+app.get("/", function(req, res) {
+  res.send("✅ Servidor listo. Serverless Express final.");
+});
+
+// ==== EXPORTACIÓN FINAL PARA NETLIFY ====
+// Esta línea es la única que Netlify ejecuta.
+module.exports.handler = serverless(app);
