@@ -1,18 +1,14 @@
 {
-  "name": "stockflow_backend",
+  "name": "stockflow-backend-final",
   "version": "1.0.0",
   "description": "Backend de simulación para StockFlow (Netlify Serverless)",
-  "main": "functions/index.js",
+  "main": "netlify.js",
   "scripts": {
-    "start": "node functions/index.js"
+    "start": "node netlify.js"
   },
-  "keywords": [
-    "node",
-    "netlify"
-  ],
-  "author": "",
-  "license": "ISC",
   "dependencies": {
-    "axios": "^1.7.2"
+    "cors": "^2.8.5",
+    "express": "^4.21.2",
+    "serverless-http": "^3.2.0"
   }
 }

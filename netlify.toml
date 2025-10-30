@@ -1,3 +1,7 @@
 [build]
-  # Indica a Netlify que la carpeta donde debe buscar las funciones es 'functions'
-  functions = "functions"
+  # Comando de instalación. Netlify lo ejecuta automáticamente.
+  command = "npm install" 
+
+[functions]
+  # Le dice a Netlify que busque funciones en la carpeta 'functions'
+  directory = "functions"
