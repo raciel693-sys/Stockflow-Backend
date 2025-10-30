@@ -1,5 +1,3 @@
-// index.js (CÓDIGO FINAL DE PRODUCCIÓN - SINTAXIS CommonJS)
-
 const express = require("express");
 const cors = require("cors");
 const app = express();
@@ -33,8 +31,8 @@ app.post("/api/checkout", function(req, res) {
 app.get("/", function(req, res) {
   res.send("✅ Servidor listo. CommonJS Final.");
 });
-
-// ==== ARRANQUE ====
+// ==== ARRANQUE FINAL ====
+// Netlify lo ignorará, pero es necesario para la sintaxis Express.
 app.listen(PORT, function() {
   console.log(Servidor ejecutándose en el puerto: ${PORT});
 });
