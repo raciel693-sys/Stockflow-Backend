@@ -5,10 +5,25 @@ import express from "express";
 import serverless from "serverless-http"; 
 import cors from "cors";
 
-// ==== CONFIGURACIÓN BASE (Express) ====
+// netlify/functions/index.js (INICIO CORREGIDO)
+
+import express from "express";
+import serverless from "serverless-http"; 
+import cors from "cors";
+
+// ==== CONFIGURACIÓN BASE (Express y CORS) ====
 const app = express();
 app.use(express.json());
-app.use(cors()); // Para permitir la conexión desde Flutter
+
+// *CORRECCIÓN DE CORS: Permite todas las peticiones (Universal Access)*
+app.use(cors({ origin: true })); 
+// También podemos agregar un middleware que fuerza los encabezados
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*'); 
+    res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS'); 
+    res.header('Access-Control-Allow-Headers', 'Content-Type'); 
+    next();
+});
 
 // ==== ENDPOINTS DE STOCKFLOW (Lógica Estable) ====
 

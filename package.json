@@ -1,20 +1,25 @@
 {
   "name": "stockflow_backend",
   "version": "1.0.0",
-  "description": "Backend para StockFlow",
-  "main": "index.js",
+  "description": "Backend para la lógica de negocio de StockFlow (Netlify Serverless)",
+  "main": "netlify/functions/index.js",
+  "type": "module", 
   "scripts": {
-    "start": "node index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node netlify/functions/index.js"
   },
+  "keywords": [
+    "node",
+    "express",
+    "netlify-functions"
+  ],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@google/genai": "^0.14.0",
     "axios": "^1.7.2",
     "cors": "^2.8.5",
     "express": "^4.21.2",
-    "serverless-http": "^4.0.0",
-    "stripe": "^16.5.0"
+    "stripe": "^16.5.0",
+    "@google/genai": "^0.14.0",
+    "serverless-http": "^3.2.0" 
   }
 }
