@@ -1,48 +1,25 @@
-// functions/index.js (CÓDIGO DE PURA SIMULACIÓN - Máxima Compatibilidad)
+// index.js (CÓDIGO HANDLER UNIVERSAL)
 
-const express = require("express");
-const cors = require("cors"); 
-const app = express();
+// Eliminamos Express y CORS para esta prueba.
+// const express = require("express");
 
-app.use(express.json());
-// CORS FINAL: Permite el acceso universal
-app.use(cors({ origin: true })); 
-
-// ==== ENDPOINTS DE STOCKFLOW (Lógica 100% Simulada) ====
-
-// 1. Endpoint de Registro (POST)
-app.post("/companies", function(req, res) { // NOTA: La ruta es solo /companies
-  // Respuesta de éxito inmediato para la App de Flutter.
-  const newCompanyId = Math.floor(Math.random() * 1000000);
-  res.status(201).json({ 
-    id: newCompanyId, 
-    status: "REGISTRO_OK", 
-    mensaje: "✅ Éxito: Registro simulado en el Backend." 
-  });
-});
-
-// 2. Endpoint de Checkout (POST)
-app.post("/checkout", function(req, res) { // NOTA: La ruta es solo /checkout
-  const planName = req.body.planName || "Plan Básico";
-  const session = {
-    id: 'CS_SIMULADO',
-    url: 'https://checkout.stockflow.simulado',
-    plan: planName,
-  };
-  res.json({ sessionId: session.id, checkoutUrl: session.url, plan: session.plan });
-});
-
-// 3. Endpoint base para verificación (GET)
-app.get("/", function(req, res) {
-  res.send("✅ Servidor listo. SIMULACIÓN FINAL.");
-});
-
-// ==== EXPORTACIÓN FINAL PARA NETLIFY ====
-// Esta es la sintaxis universalmente aceptada por Netlify Functions.
-// Exportamos la función como un handler
+// Esta es la sintaxis de Serverless universal:
 exports.handler = async (event, context) => {
+    // Si la App de Flutter llama a /api/companies, devuelve un éxito simulado.
+    if (event.path.endsWith('/companies')) {
+        return {
+            statusCode: 201, // Código de éxito de creación (registro)
+            body: JSON.stringify({ 
+                id: Math.floor(Math.random() * 1000000), 
+                status: "REGISTRO_OK",
+                mensaje: "✅ Éxito: Servidor funcional." 
+            })
+        };
+    }
+    
+    // Si se llama al endpoint base
     return {
         statusCode: 200,
-        body: JSON.stringify({ message: "Servidor Listo. Handler Final." })
+        body: JSON.stringify({ message: "✅ Servidor Listo. Handler Final." })
     };
 };
